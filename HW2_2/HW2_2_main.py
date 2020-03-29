@@ -6,6 +6,7 @@ HW2_2_main.py
 """
 from HW2_2_class import *
 from HW2_2_functions import *
+import pickle
 
 choice = str(input("(a) 新增信用卡帳戶 (b) 新增儲蓄存款帳戶 (c) 更新或查詢帳戶情況: "))
 if choice == "a":
@@ -35,7 +36,9 @@ elif choice == "c":
 
                 elif option == "2": #新增信用卡消費金額
                     amount = int(input("請輸入消費金額: "))
-                    account.consume(account)
+                    account.consume(amount)
+                    with open('./info/credit/'+idnumber + '.pkl','wb') as info:
+                        pickle.dump(account,info)
 
         except FileNotFoundError:
             print("請先開立帳戶")
@@ -56,13 +59,17 @@ elif choice == "c":
                 elif option == "5": #存款
                     amount = int(input("請輸入存入金額: "))
                     user.save_money(amount)
-                    print("餘額為: %s" % (user.asknalance()))
+                    with open('./info/bank/' + idnumber + '.pkl','wb') as info:
+                        pickle.dump(user,info)
+                    print("餘額為: %s" % (user.askbalance()))
 
                 elif option == "6": # 提款
                     take_money = int(input("請輸入提出金額: "))
                     if user.inmoney > take_money:
-                        user.withdraw()
-                        print("餘額為: %s" % user.getBalance())
+                        user.withdraw(take_money)
+                        with open('./info/bank/' + idnumber + '.pkl','wb') as info:
+                            pickle.dump(user,info)
+                        print("餘額為: %s" % user.askbalance())
                     else: # 跟他說都不夠額度了還敢花錢啊
                         print("沒那麼多錢還改提這麼多啊")
 
