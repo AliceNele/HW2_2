@@ -65,12 +65,12 @@ def check_password(password): # 檢查密碼
 def pay_creditcard_fee():
     idnumber = input("請輸入身分證字號: ")
     #檢查是否有銀行跟信用卡帳戶
-    if ((idnumber + ".pkl") in os.listdir("./info/bank")) and ((idnumber + ".pkl") in os.listdir("./info/credit")): 
+    if ((idnumber + ".pkl") in os.listdir("./info/bank/")) and ((idnumber + ".pkl") in os.listdir("./info/credit/")): 
         password = input("儲蓄存款帳戶密碼: ")
         with open('./info/bank/'+idnumber + '.pkl','rb') as info: #開啟資料
             user = pickle.load(info)
         if password != user.password:#檢查密碼是否正確，情況3
-            return '密碼錯誤'
+            print("密碼錯誤")
         else: #密碼對了
             print("密碼答對")
             with open('./info/bank/'+idnumber + '.pkl','rb') as info: #開啟銀行資料
@@ -87,11 +87,11 @@ def pay_creditcard_fee():
                    #pickle.dump(data, info)
 
             else: #儲蓄帳戶餘額不足，情況5
-                return '餘額不足'
+                print( "餘額不足")
     #有銀行但沒有信用卡帳戶，情況2
-    elif ((idnumber + ".pkl") in os.listdir("./info/bank")) and ((idnumber + ".pkl") not in os.listdir("./info/credit")): 
-        return "無須繳費"
+    elif ((idnumber + ".pkl") in os.listdir("./info/bank/")) and ((idnumber + ".pkl") not in os.listdir("./info/credit/")): 
+        print( "無須繳費")
     #沒有銀行但有信用卡帳戶，情況1
-    elif ((idnumber + ".pkl") not in os.listdir("./info/bank")) and ((idnumber + ".pkl") in os.listdir("./info/credit")):
+    elif ((idnumber + ".pkl") not in os.listdir("./info/bank/")) and ((idnumber + ".pkl") in os.listdir("./info/credit/")):
         print("請先開立帳戶")
         create_bank_user()
