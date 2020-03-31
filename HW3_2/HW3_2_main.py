@@ -8,6 +8,10 @@ HW2_2_main.py
 from HW3_2_class import*
 from HW3_2_functions import*
 import pickle
+from pathlib import Path
+
+Path("./info/credit").mkdir(parents = True, exist_ok = True)
+Path("./info/bank").mkdir(parents = True, exist_ok = True)
 
 choice = str(input("(a) 新增信用卡帳戶 (b) 新增儲蓄存款帳戶 (c) 更新或查詢帳戶情況 (d) 繳信用卡費: "))
 if choice == "a":
