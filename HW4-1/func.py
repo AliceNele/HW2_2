@@ -44,8 +44,9 @@ start = "2020-03-16"
 end = "2020-03-20"
 getPriceData(ticker,start,end)
 
-'''
+
 ticker = int(input("請輸入台灣股票代碼： ")
-start = input("請輸入開始時間：")
+start = int(input("請輸入開始時間："))
 end = input("請輸入結束時間")
 getPriceData(ticker,start,end)
+'''

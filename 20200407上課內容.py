@@ -98,8 +98,10 @@ try:
             print(i)
 except Exitloop:
     print("Stop")
-'''
+
 #==================
+#記錄錯誤資訊
+#用以紀錄哪裡做錯了
 import traceback
 def inverse(x):
     return 1/x
@@ -109,7 +111,11 @@ try:
 except:
     traceback.print_exc(file = open("9_traceback.exc","w"))
 
-
+'''
+import matplotlib.pyplot as plt
+a = list(range(1,10))
+plt.plot(a,"o--r")
+plt.show()
 
 
 
