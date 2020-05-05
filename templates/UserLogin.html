@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Apr 28 17:03:18 2020
+
+@author: ASUS
+"""
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Page</title>
+</head>
+<body>
+    <form method='post' action={{ url_for('login') }}> 
+    <p>
+        <label> 帳號 </label>
+        <input type='text' name='username' />
+    </p>
+    <p>
+        <label> 密碼 </label>
+        <input type='text' name='password' />
+    </p>
+    <p>
+        <button type='submit'>Submit</button>
+    </p>    
+    </form>
+</body>
+</html>
