@@ -90,8 +90,10 @@ def pay_creditcard_fee():
                 account.used = 0               #將卡費清空
                 print("繳費後餘額: %d" % user.inmoney)
                   #不確定還需不需要存檔這個動作
-               #with open('./info/bank/'+idnumber+'.pkl','wb') as info:
-                   #pickle.dump(data, info)
+                with open('./info/bank/'+idnumber+'.pkl','wb') as info:
+                    pickle.dump(data, info)
+                with open('./info/credit/'+ idnumber +".pkl","wb") as info:
+                    pickle.dump(account, info)
 
             else: #儲蓄帳戶餘額不足，情況5
                 print( "餘額不足")

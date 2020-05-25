@@ -4,17 +4,11 @@ Created on Thu Mar 26 00:56:54 2020
 HW2_2_main.py
 @author: Alice Cheng
 """
-
-from HW3_2_class import *
-from HW3_2_functions import *
+from HW2_2_class import *
+from HW2_2_functions import *
 import pickle
-from pathlib import Path
 
-# Create folder for saving data
-Path(get_data_path("credit")).mkdir(parents = True, exist_ok = True)
-Path(get_data_path("bank")).mkdir(parents = True, exist_ok = True)
-
-choice = str(input("(a) 新增信用卡帳戶 (b) 新增儲蓄存款帳戶 (c) 更新或查詢帳戶情況 (d) 繳信用卡費: "))
+choice = str(input("(a) 新增信用卡帳戶 (b) 新增儲蓄存款帳戶 (c) 更新或查詢帳戶情況: "))
 if choice == "a":
     create_credit_user() #回去執行 開立信用卡帳戶
 
@@ -33,7 +27,7 @@ elif choice == "c":
     option = input("請選擇欲執行之功能： ")
     if option == "1" or option == "2": # 信用卡功能
         try:
-            with open(get_data_path("credit", idnumber),'rb') as info:
+            with open('./info/credit/'+idnumber + '.pkl','rb') as info:
                 account = pickle.load(info)
 
                 if option == "1": #查詢信用卡可用餘額
@@ -43,7 +37,7 @@ elif choice == "c":
                 elif option == "2": #新增信用卡消費金額
                     amount = int(input("請輸入消費金額: "))
                     account.consume(amount)
-                    with open(get_data_path("credit", idnumber),'wb') as info:
+                    with open('./info/credit/'+idnumber + '.pkl','wb') as info:
                         pickle.dump(account,info)
 
         except FileNotFoundError:
@@ -53,19 +47,19 @@ elif choice == "c":
     if option == "3" or option == "4" or option == "5" or option == "6":
         #file_list = os.listdir('info')
         try:
-            with open(get_data_path("bank", idnumber),'rb') as info:
+            with open('./info/bank/' + idnumber + '.pkl','rb') as info:
                 user = pickle.load(info)
 
                 if option == "3": #查詢儲蓄存款帳戶密碼
                     print("密碼為: %s" %(user.password))
 
                 elif option == "4": #查詢儲蓄存款帳戶餘額
-                    print("餘額為: %s" % (user.askbalance()))
+                    print("餘額為: %s" % (user.asknalance()))
 
                 elif option == "5": #存款
                     amount = int(input("請輸入存入金額: "))
                     user.save_money(amount)
-                    with open(get_data_path("bank", idnumber),'wb') as info:
+                    with open('./info/bank/' + idnumber + '.pkl','wb') as info:
                         pickle.dump(user,info)
                     print("餘額為: %s" % (user.askbalance()))
 
@@ -73,7 +67,7 @@ elif choice == "c":
                     take_money = int(input("請輸入提出金額: "))
                     if user.inmoney > take_money:
                         user.withdraw(take_money)
-                        with open(get_data_path("bank", idnumber),'wb') as info:
+                        with open('./info/bank/' + idnumber + '.pkl','wb') as info:
                             pickle.dump(user,info)
                         print("餘額為: %s" % user.askbalance())
                     else: # 跟他說都不夠額度了還敢花錢啊
@@ -82,7 +76,3 @@ elif choice == "c":
         except FileNotFoundError:
             print("請先開立帳戶")
             create_bank_user() #回去執行 開立銀行帳戶
-
-elif choice == "d":
-    pay_creditcard_fee()
-
