@@ -49,16 +49,19 @@ def login():
         with open('username' +".pkl",'rb') as f:
             account = pickle.load(f)
         balance = account.getBalance()
-        return '餘額： ' + request.values['username'].balance
-    return  "<form method ='post' action='/login'>" \
+        return '餘額： ' + balance
+    return render_template('creditcard.html')
+    
+if __name__ == '__main__':
+    app.run()
+
+'''
+return  "<form method ='post' action='/login'>" \
            "<input type='text' name='username' />" \
             "</br>" \
            "<button type='submit'>Submit</button>" \
            "</form>"
-if __name__ == '__main__':
-    app.run()
-
-
+'''
 
 
 
