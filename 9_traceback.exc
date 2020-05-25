@@ -1,6 +1,0 @@
-Traceback (most recent call last):
-  File "C:/Users/ASUS/Documents/GitHub/NTHU-QF-programming-HW/20200407上課內容.py", line 107, in <module>
-    inverse(0)
-  File "C:/Users/ASUS/Documents/GitHub/NTHU-QF-programming-HW/20200407上課內容.py", line 105, in inverse
-    return 1/x
-ZeroDivisionError: division by zero
